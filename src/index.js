@@ -5,7 +5,7 @@ import { goods } from './goods.js';
  * @returns {*}
  */
 const brandFilter = (brand) => {
-   let brandItems = goods.filter((currentgood)=> currentgood.brand === brand);
+   let brandItems = goods.filter((currentGood)=> currentGood.brand === brand);
    return brandItems;  
 
 };
@@ -15,7 +15,7 @@ const brandFilter = (brand) => {
  * @returns {*}
  */
 const colorFilter = (color) => {
-  let colorItems = goods.filter((currentcolor)=> currentcolor.color === color);
+  let colorItems = goods.filter((currentColor)=> currentColor.color === color);
   return colorItems;  
 };
 
@@ -24,7 +24,7 @@ const colorFilter = (color) => {
  * @returns {*}
  */
 const modelFilter = (model) => {
-  let modelItems = goods.filter((currentmodel)=> currentmodel.model === model);
+  let modelItems = goods.filter((currentModel)=> currentModel.model === model);
   return modelItems;  
 };
 
@@ -33,7 +33,7 @@ const modelFilter = (model) => {
  * @returns {*}
  */
 const memoryFilter = (memory) => {
-  let memoryItems = goods.filter((currentmemory)=> currentmemory.memory === memory);
+  let memoryItems = goods.filter((currentMemory)=> currentMemory.memory === memory);
   return memoryItems;  
 };
 
@@ -42,7 +42,7 @@ const memoryFilter = (memory) => {
  * @returns {*}
  */
 const priceFilter = (price) => {
-  let priceItems = goods.filter((currentprice)=> currentprice.price === price);
+  let priceItems = goods.filter((currentPrice)=> currentPrice.price === price);
   return priceItems;  
 };
 
@@ -51,7 +51,7 @@ const priceFilter = (price) => {
  * @returns {*}
  */
 const countryFilter = (country) => {
-  let countryItems = goods.filter((currentcountry)=> currentcountry.country === country);
+  let countryItems = goods.filter((currentCountry)=> currentCountry.country === country);
   return countryItems; 
 };
 
@@ -60,50 +60,22 @@ const countryFilter = (country) => {
  * @returns {*}
  */
 const osFilter = (os) => {
-  let osItems = goods.filter((currentos)=> currentos.os === os);
+  let osItems = goods.filter((currentOs)=> currentOs.os === os);
   return osItems;
 };
 
-// /**
-//  * @param {number} from
-//  * @param {number} to
-//  */
-const rangeFilter = (from, to) => {
-  return function(currentprice) {
-    return currentprice >= from && currentprice <= to;
-  };
-    
-  
-};
+/**
+ * @param {number} from
+ * @param {number} to
+*/
+const rangeFilter = (from, to) => goods.filter((item) =>item.price>= from && item.price <= to);
 
-const minPriceReducer = () => {
+const minPriceReducer = () => goods.reduce((accumulator, good) => Math.min(accumulator, good.price), Infinity);
 
-  let PriceReducer = goods.reduce(function (a,b) {
-  
-    return Math.min(a,b.price);
-  });
+const maxPriceReducer = () => goods.reduce((accumulator, good) => Math.max(accumulator, good.price), -Infinity);
 
-
-  // console.log(PriceReducer);
-};
-
-const maxPriceReducer = () => {};
-
-const toMaxSorter = () => {
-  // function compare( a, b ) {
-  //   debugger
-  //   if ( a.goods < b.goods ){
-  //     return -1;
-  //   }
-  //   if ( a.goods > b.goods ){
-  //     return 1;
-  //   }
-  //   return 0;
-  // }
-  
-  // goods.sort( compare );
-};
-const toMinSorter = () => {};
+const toMaxSorter = () =>  goods.sort((firstGood,secondGood) => secondGood.price - firstGood.price);
+const toMinSorter = () => goods.sort((firstGood,secondGood) => firstGood.price - secondGood.price);
 
 export const filters = {
   brandFilter,
